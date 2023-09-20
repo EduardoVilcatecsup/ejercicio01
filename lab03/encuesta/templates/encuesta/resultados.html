@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de Venta</title>
+</head>
+<body>
+    <h1>Resultados de Venta - Factura {{ venta.numero_factura }}</h1>
+
+    <h2>Productos:</h2>
+    <ul>
+        {% for detalle in detalles %}
+            <li>
+                <h3>{{ detalle.producto.nombre }}</h3>
+                <p>Precio: ${{ detalle.precio_venta }}</p>
+                <p>Cantidad vendida: {{ detalle.cantidad_vendida }}</p>
+                <p>Total por producto: ${{ detalle.monto_total }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p>Total de la venta: ${{ venta.monto_final }}</p>
+</body>
+</html>

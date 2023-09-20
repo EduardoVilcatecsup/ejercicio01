@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+</head>
+<body>
+    <h1>Página de Inicio</h1>
+
+    <h2>Ventas Recientes</h2>
+    <ul>
+        {% for venta in ventas_recientes %}
+            <li>
+                <a href="{% url 'encuesta:detalle_venta' venta.id %}">
+                    Venta {{ venta.numero_factura }} - {{ venta.fecha }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Productos</h2>
+    <ul>
+        {% for producto in productos %}
+            <li>
+                <h3>{{ producto.nombre }}</h3>
+                <p>Precio: ${{ producto.precio_actual }}</p>
+                <p>Stock: {{ producto.stock }}</p>
+                <p>Proveedor: {{ producto.proveedor.nombre }}</p>
+                <p>Categorías:</p>
+                <ul>
+                    {% for categoria in producto.categorias.all %}
+                        <li>{{ categoria.nombre }} - {{ categoria.descripcion }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Personas</h2>
+    <ul>
+        {% for persona in personas %}
+            <li>
+                <h3>{{ persona.nombre }}</h3>
+                <p>Código: {{ persona.codigo }}</p>
+                <p>Direcciones:</p>
+                <ul>
+                    {% for direccion in persona.direcciones.all %}
+                        <li>{{ direccion.calle }}, {{ direccion.numero }}, {{ direccion.comuna }}, {{ direccion.ciudad }}</li>
+                    {% endfor %}
+                </ul>
+                <p>Teléfonos:</p>
+                <ul>
+                    {% for telefono in persona.telefonos.all %}
+                        <li>{{ telefono.numero }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

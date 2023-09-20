@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle</title>
+</head>
+<body>
+    {% if producto %}
+        <h1>Detalle del Producto</h1>
+        <h3>{{ producto.nombre }}</h3>
+        <p>Precio: ${{ producto.precio_actual }}</p>
+        <p>Stock: {{ producto.stock }}</p>
+        <p>Proveedor: {{ producto.proveedor.nombre }}</p>
+        <p>Categorías:</p>
+        <ul>
+            {% for categoria in producto.categorias.all %}
+                <li>{{ categoria.nombre }} - {{ categoria.descripcion }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if persona %}
+        <h1>Detalle de la Persona</h1>
+        <h3>{{ persona.nombre }}</h3>
+        <p>Código: {{ persona.codigo }}</p>
+        <p>Direcciones:</p>
+        <ul>
+            {% for direccion in persona.direcciones.all %}
+                <li>{{ direccion.calle }}, {{ direccion.numero }}, {{ direccion.comuna }}, {{ direccion.ciudad }}</li>
+            {% endfor %}
+        </ul>
+        <p>Teléfonos:</p>
+        <ul>
+            {% for telefono in persona.telefonos.all %}
+                <li>{{ telefono.numero }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if venta %}
+        <h1>Detalle de Venta - Factura {{ venta.numero_factura }}</h1>
+
+        <h2>Productos:</h2>
+        <ul>
+            {% for detalle in detalles %}
+                <li>{{ detalle.producto.nombre }} - Precio: ${{ detalle.precio_venta }} - Cantidad: {{ detalle.cantidad_vendida }} - Total: ${{ detalle.monto_total }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>Total de la venta: ${{ venta.monto_final }}</p>
+    {% endif %}
+</body>
+</html>
+
